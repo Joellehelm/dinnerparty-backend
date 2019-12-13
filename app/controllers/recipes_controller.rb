@@ -1,8 +1,8 @@
 class RecipesController < ApplicationController
-    skip_before_action :authorized
+    # skip_before_action :authorized
 
     def index
-        recipes = recipe.all
+        recipes = Recipe.all
         render json: Recipes.to_json(recipes_serializer)
     end
 
