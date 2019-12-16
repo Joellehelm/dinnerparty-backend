@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorized, only: [:create]
+  skip_before_action :authorized, only: [:create, :usernames]
  
   def index
     @users = User.all
@@ -43,6 +43,16 @@ end
     else
       render json: { error: 'failed to create user', status: :not_acceptable}
     end
+  end
+
+
+  def usernames
+    @usernames = []
+    User.all.each do |user|
+      @usernames << user.username
+    end
+    
+    render json: @usernames
   end
   
 private
