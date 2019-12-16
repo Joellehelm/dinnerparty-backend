@@ -49,7 +49,7 @@ end
   def usernames
     @usernames = []
     User.all.each do |user|
-      @usernames << user.username
+      @usernames << {username: user.username, id: user.id}
     end
     
     render json: @usernames
