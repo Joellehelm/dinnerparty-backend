@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :lists
   resources :recipes
+  resources :parties
+
+
       resources :users, only: [:create, :usernames]
       post '/login', to: 'auth#create'
       delete '/logout', to: 'auth#destroy'

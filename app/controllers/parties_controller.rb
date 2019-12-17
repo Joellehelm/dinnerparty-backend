@@ -1,5 +1,6 @@
-class PartyController < ApplicationController
-
+class PartiesController < ApplicationController
+    skip_before_action :authorized, only: [:create]
+        
     def index
         parties = Party.all
         render json: Party.to_json(parties_serializer)
@@ -8,8 +9,10 @@ class PartyController < ApplicationController
     def show
         render json: Party.find(params['id']).to_json(parties_serializer)
     end 
- 
+
     def create
+        # new_party = Party.new(parties_params)
+        # if new_party
         new_party = Party.create(parties_params)
         render json: new_party
     end
@@ -27,16 +30,15 @@ class PartyController < ApplicationController
     private
 
     def parties_params
-        params.require(:party).permit(:party_id, :ingredients => [])
+        params.require(:party).permit(:name, :host_id, :address, :details, :date)
     end
 
     def parties_serializer
         {
-            :only => [:party_id, :ingredients => []]
+            :only => [:id, :name, :host_id, :address, :details, :date]
 
             
         }
     end
-
 
 end
