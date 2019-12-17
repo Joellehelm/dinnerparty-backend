@@ -1,9 +1,9 @@
 class PartiesController < ApplicationController
-    skip_before_action :authorized, only: [:create]
+    skip_before_action :authorized
         
     def index
         parties = Party.all
-        render json: Party.to_json(parties_serializer)
+        render json: parties.to_json(parties_serializer)
     end
 
     def show

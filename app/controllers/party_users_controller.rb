@@ -3,11 +3,11 @@ class PartyUsersController < ApplicationController
         
     def index
         party_users = PartyUser.all
-        render json: PartyUser.to_json(party_users_serializer)
+        render json: party_users.to_json(party_users_serializer)
     end
 
     def show
-        render json: Party.find(params['id']).to_json(party_users_serializer)
+        render json: PartyUser.find(params['id']).to_json(party_users_serializer)
     end 
 
     def create
@@ -39,7 +39,11 @@ class PartyUsersController < ApplicationController
 
     def party_users_serializer
         {
-            :only => [:id, :party_id, :user_id => [] ]
+            :only => [:id, :party_id, :user_id],
+
+            :include => {:party => {
+                :except => [:updated_at, :created_at]
+            }}
 
             
         }
