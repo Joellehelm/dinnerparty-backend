@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-    # skip_before_action :authorized
+    skip_before_action :authorized
 
     def index
         recipes = Recipe.all
@@ -28,12 +28,12 @@ class RecipesController < ApplicationController
     private
 
     def recipes_params
-        params.require(:recipe).permit(:name, :api_id, :image, :servings, :time, :cuisine, :image_urls => [])
+        params.require(:recipe).permit(:name, :api_id, :image)
     end
 
     def recipes_serializer
         {
-            :only => [:name, :api_id, :image, :servings, :time, :cuisine, :image_urls => []]
+            :only => [:name, :api_id, :image]
 
             
         }

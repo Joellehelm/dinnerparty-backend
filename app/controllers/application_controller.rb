@@ -30,17 +30,12 @@ class ApplicationController < ActionController::API
       end
     end
 
-    def login!
-      session[:user_id] = @user.id
-    end
-   
+  
     def logged_in?
       !!current_user
     end
 
-    def logout!
-      session.clear
-    end
+  
    
     def authorized
       render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
