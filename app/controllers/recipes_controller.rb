@@ -28,12 +28,12 @@ class RecipesController < ApplicationController
     private
 
     def recipes_params
-        params.require(:recipe).permit(:name, :api_id, :image)
+        params.require(:recipe).permit(:name, :api, :image)
     end
 
     def recipes_serializer
         {
-            :only => [:name, :api_id, :image]
+            :only => [:name, :api, :image]
 
             
         }
