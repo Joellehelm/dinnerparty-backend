@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
 
     def index
         recipes = Recipe.all
-        render json: Recipes.to_json(recipes_serializer)
+        render json: recipes.to_json(recipes_serializer)
     end
 
     def show
@@ -33,7 +33,8 @@ class RecipesController < ApplicationController
 
     def recipes_serializer
         {
-            :only => [:name, :api, :image]
+            :only => [:name, :api, :image, :ingredients => {}],
+            :include => {:ingredients => {}}
 
             
         }

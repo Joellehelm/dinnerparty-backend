@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :party_users
   resources :party_recipes
   resources :ingredients
+  resources :user_ingredients
 
 
       resources :users, only: [:create, :usernames]

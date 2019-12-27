@@ -34,7 +34,7 @@ class PartyRecipesController < ApplicationController
     def party_recipes_serializer
         {
             :only => [:party_id, :recipe_id],
-                :include => {:recipe => {}}
+                :include => {:recipe => {}, :ingredients => {}}
 
 
             

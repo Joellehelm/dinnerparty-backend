@@ -35,7 +35,8 @@ class PartiesController < ApplicationController
 
     def parties_serializer
         {
-            :only => [:id, :name, :host_id, :address, :details, :date]
+            :only => [:id, :name, :host_id, :address, :details, :date],
+            
 
             
         }

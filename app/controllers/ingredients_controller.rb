@@ -39,7 +39,9 @@ class IngredientsController < ApplicationController
 
     def ingredients_serializer
         {
-            :only => [:id, :name, :recipe_id, :party_id, :ingredients => []]
+            :only => [:id, :name, :recipe_id, :party_id, :ingredients => []],
+
+            :include => {:recipe => {}}
 
             
         }
