@@ -1,5 +1,5 @@
 class PartyRecipesController < ApplicationController
-    skip_before_action :authorized
+  
         
     def index
         party_recipes = PartyRecipe.all

@@ -1,5 +1,5 @@
 class UserIngredientsController < ApplicationController
-    skip_before_action :authorized
+    
         
     def index
         user_ingredients = UserIngredient.all
