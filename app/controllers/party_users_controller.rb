@@ -1,5 +1,5 @@
 class PartyUsersController < ApplicationController
-    skip_before_action :authorized
+   
         
     def index
         party_users = PartyUser.all
