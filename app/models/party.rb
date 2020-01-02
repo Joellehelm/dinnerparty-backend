@@ -4,7 +4,7 @@ class Party < ApplicationRecord
     has_many :party_recipes, dependent: :destroy
     has_many :ingredients, :through => :party_recipes, :source => :recipes
 
-
+    validates :name, :presence => true
    
 
 end
