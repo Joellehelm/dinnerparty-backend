@@ -1,5 +1,5 @@
 class PartyUsersController < ApplicationController
-   
+    skip_before_action :authorized
         
     def index
         party_users = PartyUser.all
@@ -41,7 +41,7 @@ class PartyUsersController < ApplicationController
         {
             :only => [:id, :party_id, :user_id],
 
-            :include => {:party => {
+            :include => {:room => {}, :party => {
                 :except => [:updated_at, :created_at]
             }}
 
