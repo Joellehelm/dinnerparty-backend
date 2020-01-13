@@ -10,7 +10,6 @@ class RoomsChannel < ApplicationCable::RoomsChannel
     end
 
     def unsubscribed
-
     end
 
     
