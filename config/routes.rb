@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   resources :ingredients
   resources :user_ingredients
 
+  resources :rooms, only: [:index, :show, :create]
+  resources :messages, only: [:index, :create]
+  mount ActionCable.server => '/cable'  
+
+
 
       resources :users, only: [:create, :usernames]
       post '/login', to: 'auth#create'
