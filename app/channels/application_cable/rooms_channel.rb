@@ -1,4 +1,4 @@
-class RoomsChannel < ApplicationCable::RoomsChannel
+class RoomsChannel < ApplicationCable::Channel
 
     def subscribed
         @room = Room.find_by(party_id: params[:room])
