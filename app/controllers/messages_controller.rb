@@ -10,13 +10,7 @@ class MessagesController < ApplicationController
         room = Room.find(params["room_id"])
         
         if message.save
-         
-        # this gives back the user and not just the id, why is only the id being broadcasted for messages
-        # puts "================================================="
-        # something = room.messages
-        # puts room.messages[-1].user.username
-        # puts "=================================================="
-        
+                 
             RoomsChannel.broadcast_to(room,{
                 room: room,
                 users: room.users,
