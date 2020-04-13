@@ -8,9 +8,14 @@ class MessagesController < ApplicationController
     def create
         message = Message.new(message_params)
         room = Room.find(params["room_id"])
-      
+        
         if message.save
          
+        # this gives back the user and not just the id, why is only the id being broadcasted for messages
+        # puts "================================================="
+        # something = room.messages
+        # puts room.messages[-1].user.username
+        # puts "=================================================="
         
             RoomsChannel.broadcast_to(room,{
                 room: room,
@@ -31,36 +36,19 @@ class MessagesController < ApplicationController
 
     def message_serializer
         {
-            :only => [:id, :content, :room, :user],
-            :include => {:user => {}, :room => {}}
+            :only => [:id, :content, :room],
+                :include => {:user => {:except => [:email, :password]}, :room => {}}
             
         }
     end
 end
 
-# class MessagesController < ApplicationController
-#     def index
-#         messages = Message.all
-#         render json: messages
-#     end
+{
+    :only => [:id, :party_id, :user_id],
 
-#     def create
-#         message = Message.new(message_params)
-#         room = Room.find(message_params["room_id"])
-#         if message.save
-#             puts "successfully saved a message!"
-#             RoomsChannel.broadcast_to(room, {
-#                 room: RoomSerializer.new(room),
-#                 users: UserSerializer.new(room.users),
-#                 messages: MessageSerializer.new(room.messages)
-#             })
-#         end
-#         render json: MessageSerializer.new(message)
-#     end
+    :include => {:room => {}, :party => {
+        :except => [:updated_at, :created_at]
+    }}
 
-#     private
-
-#     def message_params
-#         params.require(:message).permit(:content, :user_id, :room_id)
-#     end
-# end
+    
+}

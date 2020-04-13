@@ -25,14 +25,20 @@ class RoomsController < ApplicationController
     end
 
     def room_serializer
-        {
-            :only => [:id, :party_id, :user_id],
+        # {
+        #     :only => [:id, :party_id, :user_id],
 
-            :include => {:users => {
-                :only => [:id, :username]
-            }, :messages => {:user => { :only => [:id, :username]}}}
+        #     :include => {:users => {
+        #         :only => [:id, :username]
+        #     }, :messages => {:user => { :only => [:id, :username]}}}
             
-        }
+        # }
+        {
+                        :only => [:id, :party_id, :user_id],
+            
+                        :include => {:users => { :only => [:id, :username]}, :messages => { :include => {:user => {:only => [:id, :username]}}}}
+                        
+                    }
     end
 end
 
