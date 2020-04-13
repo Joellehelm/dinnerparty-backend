@@ -7,11 +7,6 @@ Rails.application.routes.draw do
   resources :ingredients
   resources :user_ingredients
 
-  resources :rooms, only: [:index, :show, :create]
-  resources :messages, only: [:index, :create]
-  mount ActionCable.server => '/cable'  
-
-
 
       resources :users, only: [:create, :usernames]
       post '/login', to: 'auth#create'
@@ -19,4 +14,7 @@ Rails.application.routes.draw do
       get '/logged_in', to: 'application#logged_in?'
       get '/usernames', to: 'users#usernames'
   
+      resources :rooms, only: [:index, :show, :create]
+      resources :messages, only: [:index, :create]
+      mount ActionCable.server => '/cable'  
 end

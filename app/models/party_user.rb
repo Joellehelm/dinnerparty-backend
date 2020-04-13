@@ -1,6 +1,6 @@
 class PartyUser < ApplicationRecord
     
     belongs_to :party
-    has_one :users
+    belongs_to :user
     has_one :room, :through => :party
 end
