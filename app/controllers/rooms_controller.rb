@@ -11,8 +11,7 @@ class RoomsController < ApplicationController
     end
 
     def show
-        # room = Room.find(params[:id])
-        # render json: room
+     
         render json: Room.find(params['id']).to_json(room_serializer)
     end
 
