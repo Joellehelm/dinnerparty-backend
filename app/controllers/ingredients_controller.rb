@@ -11,14 +11,11 @@ class IngredientsController < ApplicationController
     end 
 
     def create
-      
-        new_ingredient = ingredients_params['ingredients'].each do |item|
-        
-
-        new_ingredient = Ingredient.create(recipe_id: ingredients_params['recipe_id'], name: item, party_id: ingredients_params['party_id'])
-        end
-        render json: new_ingredient
-     
+        new_ingredients = params[:ingredient][:ingredients].each do |ing|
+                Ingredient.create(recipe_id: ingredients_params[:recipe_id], name: ing["item"], party_id: ingredients_params[:party_id], picture: ing["image"])
+            end
+    
+        render json: new_ingredients
     end
 
     def destroy
