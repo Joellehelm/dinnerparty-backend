@@ -11,14 +11,10 @@ class PartyUsersController < ApplicationController
     end 
 
     def create
-        
-       new_party_user = party_users_params['user_id'].map do |id|
-        new_party_user = PartyUser.create(party_id: party_users_params['party_id'], user_id: id)
-       
+        new_party_users = params["party_user"].map do |user|
+            PartyUser.create(party_id: params["party_id"], user_id: user['id'])
        end
-
-    
-        render json: new_party_user
+        render json: new_party_users
     end
 
     def destroy
@@ -30,11 +26,21 @@ class PartyUsersController < ApplicationController
         render json: party_user
     end
 
+    def hosting
+        hosted_parties = Party.all.select{ |party| party.host_id == current_user.id}
+        render json: hosted_parties
+    end
+
+    def attending
+        hosted_parties = Party.all.select{ |party| party.host_id == current_user.id}
+        my_parties = current_user.party_users.map{|p| p.party}
+        render json: my_parties.select{|p| hosted_parties}
+    end
 
     private
 
     def party_users_params
-        params.require(:party_user).permit(:party_id, {:user_id => []})
+        params.require(:party_user).permit(:party_id, :user_id => [])
     end
 
     def party_users_serializer

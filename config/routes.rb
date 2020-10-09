@@ -13,8 +13,9 @@ Rails.application.routes.draw do
       delete '/logout', to: 'auth#destroy'
       get '/logged_in', to: 'application#logged_in?'
       get '/usernames', to: 'users#usernames'
+      get '/hosting', to: "party_users#hosting"
+      get '/attending', to: "party_users#attending"
   
       resources :rooms, only: [:index, :show, :create]
       resources :messages, only: [:index, :create]
-      mount ActionCable.server => '/cable'  
 end
